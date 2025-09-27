@@ -1,0 +1,15 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}{{ post.title }} - Tech Insider Pro{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+  <article class="prose lg:prose-xl">
+    <h1>{{ post.title }}</h1>
+    <p class="text-sm text-gray-500">Published: {{ post.created_at|date:'F j, Y' }}</p>
+    {% if post.featured_image %}
+    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="mb-6" style="max-width:100%;height:auto;">
+{% endif %}
+    <div>{{ post.content|safe }}</div>
+  </article>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "mainapp/base.html" %}
+
+{% block title %}{{ review.title }} - Tech Insider Pro{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="bg-white rounded-lg shadow-lg p-8">
+        {% if review.featured_image %}
+            <img src="{{ review.featured_image.url }}" alt="{{ review.title }}" class="w-full h-64 object-cover rounded mb-6">
+        {% endif %}
+
+        <h1 class="text-3xl font-bold mb-4">{{ review.title }}</h1>
+        <p class="text-gray-600 mb-4">⭐ Rating: {{ review.rating }}/5</p>
+
+        <div class="prose max-w-none mb-6">
+            {{ review.content|linebreaks }}
+        </div>
+
+        {% if review.pros %}
+        <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+            <h2 class="text-lg font-semibold">✅ Pros</h2>
+            <p>{{ review.pros|linebreaks }}</p>
+        </div>
+        {% endif %}
+
+        {% if review.cons %}
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+            <h2 class="text-lg font-semibold">❌ Cons</h2>
+            <p>{{ review.cons|linebreaks }}</p>
+        </div>
+        {% endif %}
+
+        {% if review.affiliate_link %}
+        <a href="{{ review.affiliate_link }}" target="_blank" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+            Buy Now →
+        </a>
+        {% endif %}
+    </article>
+</div>
+{% endblock %}

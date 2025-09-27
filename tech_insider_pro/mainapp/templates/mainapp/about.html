@@ -1,0 +1,65 @@
+{% extends "mainapp/base.html" %}
+{% block title %}About - Tech Insider Pro{% endblock %}
+{% load static %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+        <!-- Logo Section -->
+        <div class="w-32 h-32 mx-auto mb-6 flex items-center justify-center">
+            <img src="{% static 'images/logo.png' %}" alt="Tech Insider Pro Logo" class="w-full h-full object-contain rounded-full shadow-md">
+        </div>
+
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">About Tech Insider Pro</h1>
+        <p class="text-xl text-gray-600">Your trusted source for honest tech reviews and smart purchasing decisions</p>
+    </div>
+
+    <div class="prose max-w-none">
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Our Mission</h2>
+            <p class="text-gray-600 mb-4">
+                At Tech Insider Pro, we're passionate about helping you navigate the ever-evolving world of technology. 
+                Our mission is to provide honest, in-depth reviews and comparisons of the latest gadgets, AI tools, 
+                and software to help you make informed purchasing decisions.
+            </p>
+            <p class="text-gray-600 mb-4">
+                We test every product thoroughly and maintain complete transparency about our affiliate partnerships. 
+                Our recommendations are based solely on product quality, value, and user experience.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">What We Cover</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-robot text-blue-600 mr-3"></i>
+                        <h3 class="font-semibold">AI Tools & Software</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Latest AI applications, productivity tools, and automation software</p>
+                </div>
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-mobile-alt text-green-600 mr-3"></i>
+                        <h3 class="font-semibold">Smartphones & Tablets</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Comprehensive reviews of mobile devices and accessories</p>
+                </div>
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-laptop text-purple-600 mr-3"></i>
+                        <h3 class="font-semibold">Computers & Laptops</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Gaming rigs, workstations, and everyday computing solutions</p>
+                </div>
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-headphones text-red-600 mr-3"></i>
+                        <h3 class="font-semibold">Audio & Accessories</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">Headphones, speakers, and tech accessories</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

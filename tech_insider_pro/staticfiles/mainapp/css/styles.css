@@ -1,0 +1,34 @@
+/* styles.css - main site styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { font-family: 'Inter', sans-serif; }
+
+.gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.hover-scale { transition: transform 0.3s ease; }
+.hover-scale:hover { transform: scale(1.05); }
+.affiliate-banner { background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%); }
+.ad-space { background: #f8f9fa; border: 2px dashed #dee2e6; }
+.page-section { display: none; }
+.page-section.active { display: block; }
+.sticky-nav { position: sticky; top: 0; z-index: 50; }
+
+/* small utilities from original file */
+.bg-gray-50 { background-color: #F9FAFB; }
+.bg-gray-900 { background-color: #111827; color: #fff; }
+.text-gray-600 { color: #4B5563; }
+.text-gray-900 { color: #111827; }
+.text-gray-400 { color: #9CA3AF; }
+.rounded-lg { border-radius: 0.5rem; }
+
+/* add spacing tweaks for forms and footer inputs */
+input[type="email"], input[type="text"], textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+}
+
+/* responsive nav helper */
+#mobile-menu { display: none; }
+@media (max-width: 768px) {
+  #mobile-menu { display: block; }
+}

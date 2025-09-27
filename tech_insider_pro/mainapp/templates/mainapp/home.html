@@ -1,0 +1,118 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block title %}Home - Tech Insider Pro{% endblock %}
+
+{% block content %}
+<!-- Hero / Intro Section -->
+<section class="gradient-bg text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">Welcome to Tech Insider Pro</h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-100">Your trusted source for the latest tech reviews, guides, and curated deals.</p>
+        <a href="{% url 'mainapp:blog' %}" 
+           class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+            Explore Our Blog →
+        </a>
+    </div>
+</section>
+
+<!-- Top Picks -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">🔥 Top Picks This Week</h2>
+            <p class="text-gray-600">Hand-picked gadgets and AI tools with exclusive deals</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for pick in top_picks %}
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-6 hover:shadow-lg transition">
+                    {% if pick.image %}
+                        <img src="{{ pick.image.url }}" alt="{{ pick.title }}" class="w-full h-48 object-cover rounded mb-4">
+                    {% endif %}
+                    <h3 class="text-xl font-semibold mb-2">{{ pick.title }}</h3>
+                    {% if pick.subtitle %}<p class="text-gray-600 mb-4">{{ pick.subtitle }}</p>{% endif %}
+                    {% if pick.price_text %}<span class="text-2xl font-bold text-green-600">{{ pick.price_text }}</span>{% endif %}
+                    {% if pick.cta_url %}
+                        <a href="{{ pick.cta_url }}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 ml-2">{{ pick.cta_text }}</a>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p class="col-span-3 text-center text-gray-500">No top picks available this week.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Advertisement Banner -->
+{% if ad_banner %}
+<section class="py-8 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+        {% if ad_banner.image %}
+            <img src="{{ ad_banner.image.url }}" alt="{{ ad_banner.name }}" class="w-full max-w-[728px] rounded shadow">
+        {% else %}
+            <div class="w-full max-w-[728px]">
+                {{ ad_banner.script|safe }}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Latest Blog Posts -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">📘 Latest Blog Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in latest_posts %}
+                <article class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition p-6">
+                    {% if post.featured_image %}
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" 
+                             class="w-full h-48 object-cover rounded-lg mb-4">
+                    {% else %}
+                        <div class="h-48 bg-gray-200 flex items-center justify-center rounded-lg mb-4">
+                            <i class="fas fa-mobile-alt text-4xl text-gray-400"></i>
+                        </div>
+                    {% endif %}
+                    <h3 class="text-xl font-semibold mb-3 leading-snug">
+                        <a href="{% url 'mainapp:post_detail' post.pk %}" class="hover:underline">
+                            {{ post.title }}
+                        </a>
+                    </h3>
+                    <p class="text-gray-600 mb-5 leading-relaxed">
+                        {{ post.excerpt|default:post.content|truncatechars:120 }}
+                    </p>
+                    <a href="{% url 'mainapp:post_detail' post.pk %}" 
+                       class="inline-block text-blue-600 font-medium hover:text-blue-800 transition">
+                        Read More →
+                    </a>
+                </article>
+            {% empty %}
+                <p class="col-span-3 text-center text-gray-500">No posts published yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- Latest Reviews -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">⭐ Latest Reviews</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for review in latest_reviews %}
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    {% if review.featured_image %}
+                        <img src="{{ review.featured_image.url }}" alt="{{ review.title }}" class="w-full h-40 object-cover rounded mb-4">
+                    {% endif %}
+                    <h3 class="text-xl font-semibold mb-2">{{ review.title }}</h3>
+                    <p class="text-gray-600 mb-4">{{ review.excerpt|truncatechars:120 }}</p>
+                    <div class="mb-3">⭐ {{ review.rating }}/5</div>
+                    <a href="{% url 'mainapp:review_detail' review.slug %}" class="text-blue-600 font-medium hover:text-blue-800">Read Full Review →</a>
+                </div>
+            {% empty %}
+                <p class="col-span-3 text-center text-gray-500">No reviews available yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

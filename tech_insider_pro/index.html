@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Insider Pro - Latest Tech Gadgets & AI Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .hover-scale { transition: transform 0.3s ease; }
+        .hover-scale:hover { transform: scale(1.05); }
+        .affiliate-banner { background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%); }
+        .ad-space { background: #f8f9fa; border: 2px dashed #dee2e6; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        .sticky-nav { position: sticky; top: 0; z-index: 50; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="sticky-nav bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-microchip text-2xl text-blue-600 mr-3"></i>
+                    <span class="text-xl font-bold text-gray-900">Tech Insider Pro</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 font-medium" data-page="home">Home</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 font-medium" data-page="blog">Blog</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 font-medium" data-page="about">About</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 font-medium" data-page="contact">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-4">
+                <a href="#" class="nav-link block text-gray-700 hover:text-blue-600" data-page="home">Home</a>
+                <a href="#" class="nav-link block text-gray-700 hover:text-blue-600" data-page="blog">Blog</a>
+                <a href="#" class="nav-link block text-gray-700 hover:text-blue-600" data-page="about">About</a>
+                <a href="#" class="nav-link block text-gray-700 hover:text-blue-600" data-page="contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-section active">
+        <!-- Hero Section -->
+        <section class="gradient-bg text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Latest Tech Gadgets & AI Tools</h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-100">Discover, Compare, and Buy Smartly</p>
+                <button class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+                    Subscribe for Latest Updates
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Affiliate Products -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">🔥 Top Picks This Week</h2>
+                    <p class="text-gray-600">Hand-picked gadgets and AI tools with exclusive deals</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-6 hover-scale">
+                        <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <i class="fas fa-laptop text-4xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">MacBook Pro M3</h3>
+                        <p class="text-gray-600 mb-4">Latest Apple Silicon with incredible performance</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-green-600">$1,599</span>
+                            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-100 rounded-lg p-6 hover-scale">
+                        <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <i class="fas fa-robot text-4xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">ChatGPT Plus</h3>
+                        <p class="text-gray-600 mb-4">Premium AI assistant for productivity</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-green-600">$20/mo</span>
+                            <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Subscribe</a>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-100 rounded-lg p-6 hover-scale">
+                        <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                            <i class="fas fa-headphones text-4xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Sony WH-1000XM5</h3>
+                        <p class="text-gray-600 mb-4">Industry-leading noise cancellation</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-green-600">$399</span>
+                            <a href="#" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Space -->
+        <section class="py-8 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="ad-space h-24 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">Advertisement Space - 728x90</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Blog Posts -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Latest Reviews & Guides</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Blog Post 1 -->
+                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-4xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Smartphones</span>
+                            <h3 class="text-xl font-semibold mt-3 mb-2">iPhone 15 Pro Max: Complete Review</h3>
+                            <p class="text-gray-600 mb-4">In-depth analysis of Apple's flagship phone with titanium design and improved cameras...</p>
+                            <a href="#" class="text-blue-600 font-medium hover:text-blue-800">Read More →</a>
+                        </div>
+                    </article>
+                    <!-- Blog Post 2 -->
+                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-brain text-4xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">AI Tools</span>
+                            <h3 class="text-xl font-semibold mt-3 mb-2">Top 10 AI Writing Tools in 2024</h3>
+                            <p class="text-gray-600 mb-4">Comprehensive comparison of the best AI writing assistants for content creators...</p>
+                            <a href="#" class="text-blue-600 font-medium hover:text-blue-800">Read More →</a>
+                        </div>
+                    </article>
+                    <!-- Blog Post 3 -->
+                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-gamepad text-4xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Accessories</span>
+                            <h3 class="text-xl font-semibold mt-3 mb-2">Best Gaming Keyboards Under $200</h3>
+                            <p class="text-gray-600 mb-4">Our top picks for mechanical keyboards that won't break the bank...</p>
+                            <a href="#" class="text-blue-600 font-medium hover:text-blue-800">Read More →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="py-16 bg-gray-900 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">Stay Updated with Tech Trends</h2>
+                <p class="text-gray-300 mb-8">Get the latest reviews, deals, and AI tool recommendations delivered to your inbox</p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg text-gray-900">
+                    <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium">Subscribe</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Blog Page -->
+    <div id="blog-page" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Main Content -->
+                <div class="lg:w-2/3">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-8">Tech Blog</h1>
+                    <div class="space-y-8">
+                        <!-- Blog Post 1 -->
+                        <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 bg-gray-200 flex items-center justify-center">
+                                    <i class="fas fa-vr-cardboard text-4xl text-gray-400"></i>
+                                </div>
+                                <div class="md:w-2/3 p-6">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">AI Tools</span>
+                                    <h2 class="text-2xl font-semibold mt-3 mb-2">Apple Vision Pro: The Future of Mixed Reality</h2>
+                                    <p class="text-gray-600 mb-4">An in-depth look at Apple's revolutionary mixed reality headset and its implications for the future of computing...</p>
+                                    <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Read Full Article</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Blog Post 2 -->
+                        <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 bg-gray-200 flex items-center justify-center">
+                                    <i class="fas fa-code text-4xl text-gray-400"></i>
+                                </div>
+                                <div class="md:w-2/3 p-6">
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Software</span>
+                                    <h2 class="text-2xl font-semibold mt-3 mb-2">GitHub Copilot vs ChatGPT: Code Assistant Comparison</h2>
+                                    <p class="text-gray-600 mb-4">Which AI coding assistant is better for developers? We compare features, pricing, and performance...</p>
+                                    <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Read Full Article</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:w-1/3">
+                    <!-- Categories -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-blue-600 hover:text-blue-800">AI Tools (25)</a></li>
+                            <li><a href="#" class="text-blue-600 hover:text-blue-800">Smartphones (18)</a></li>
+                            <li><a href="#" class="text-blue-600 hover:text-blue-800">Accessories (12)</a></li>
+                            <li><a href="#" class="text-blue-600 hover:text-blue-800">Software (15)</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Ad Space -->
+                    <div class="ad-space h-64 rounded-lg mb-8 flex items-center justify-center">
+                        <span class="text-gray-500 font-medium">Ad Space 300x250</span>
+                    </div>
+
+                    <!-- Popular Posts -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Popular Posts</h3>
+                        <div class="space-y-4">
+                            <div class="flex space-x-3">
+                                <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-laptop text-gray-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Best Laptops for AI Development</h4>
+                                    <span class="text-xs text-gray-500">2 days ago</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-3">
+                                <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-microphone text-gray-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">AI Voice Cloning Tools Review</h4>
+                                    <span class="text-xs text-gray-500">1 week ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Signup -->
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold mb-4">Never Miss an Update</h3>
+                        <p class="text-gray-600 mb-4">Get the latest tech reviews and deals</p>
+                        <input type="email" placeholder="Your email" class="w-full px-3 py-2 border rounded-lg mb-3">
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about-page" class="page-section">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <div class="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <i class="fas fa-user text-4xl text-gray-400"></i>
+                </div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">About Tech Insider Pro</h1>
+                <p class="text-xl text-gray-600">Your trusted source for honest tech reviews and smart purchasing decisions</p>
+            </div>
+
+            <div class="prose max-w-none">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-semibold mb-4">Our Mission</h2>
+                    <p class="text-gray-600 mb-4">
+                        At Tech Insider Pro, we're passionate about helping you navigate the ever-evolving world of technology. 
+                        Our mission is to provide honest, in-depth reviews and comparisons of the latest gadgets, AI tools, 
+                        and software to help you make informed purchasing decisions.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        We test every product thoroughly and maintain complete transparency about our affiliate partnerships. 
+                        Our recommendations are based solely on product quality, value, and user experience.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-semibold mb-4">What We Cover</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-robot text-blue-600 mr-3"></i>
+                                <h3 class="font-semibold">AI Tools & Software</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm">Latest AI applications, productivity tools, and automation software</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-mobile-alt text-green-600 mr-3"></i>
+                                <h3 class="font-semibold">Smartphones & Tablets</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm">Comprehensive reviews of mobile devices and accessories</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-laptop text-purple-600 mr-3"></i>
+                                <h3 class="font-semibold">Computers & Laptops</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm">Gaming rigs, workstations, and everyday computing solutions</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-headphones text-red-600 mr-3"></i>
+                                <h3 class="font-semibold">Audio & Accessories</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm">Headphones, speakers, and tech accessories</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 font-medium">
+                    Subscribe for Updates
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact-page" class="page-section">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h1>
+                <p class="text-xl text-gray-600">Have questions or want to collaborate? We'd love to hear from you!</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-semibold mb-6">Send us a Message</h2>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="5" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-medium">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h2 class="text-2xl font-semibold mb-6">Connect With Us</h2>
+                        <div class="space-y-4">
+                            <a href="#" class="flex items-center text-gray-600 hover:text-blue-600">
+                                <i class="fab fa-twitter text-xl mr-4"></i>
+                                <span>Follow us on Twitter</span>
+                            </a>
+                            <a href="#" class="flex items-center text-gray-600 hover:text-blue-600">
+                                <i class="fab fa-linkedin text-xl mr-4"></i>
+                                <span>Connect on LinkedIn</span>
+                            </a>
+                            <a href="#" class="flex items-center text-gray-600 hover:text-blue-600">
+                                <i class="fab fa-instagram text-xl mr-4"></i>
+                                <span>Follow on Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ad Space -->
+                    <div class="ad-space h-64 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-500 font-medium">Advertisement Space</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-microchip text-2xl text-blue-400 mr-3"></i>
+                        <span class="text-xl font-bold">Tech Insider Pro</span>
+                    </div>
+                    <p class="text-gray-400">Your trusted source for honest tech reviews and smart purchasing decisions.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="nav-link hover:text-white" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link hover:text-white" data-page="blog">Blog</a></li>
+                        <li><a href="#" class="nav-link hover:text-white" data-page="about">About</a></li>
+                        <li><a href="#" class="nav-link hover:text-white" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Categories</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">AI Tools</a></li>
+                        <li><a href="#" class="hover:text-white">Smartphones</a></li>
+                        <li><a href="#" class="hover:text-white">Accessories</a></li>
+                        <li><a href="#" class="hover:text-white">Software</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Get the latest updates and deals</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="flex-1 px-3 py-2 rounded-l-lg text-gray-900">
+                        <button class="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2024 Tech Insider Pro. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page-section');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Page navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = link.getAttribute('data-page');
+                
+                // Hide all pages
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Show target page
+                document.getElementById(`${targetPage}-page`).classList.add('active');
+                
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Newsletter subscription (placeholder)
+        const subscribeButtons = document.querySelectorAll('button');
+        subscribeButtons.forEach(btn => {
+            if (btn.textContent.includes('Subscribe')) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('Thank you for subscribing! (This is a demo)');
+                });
+            }
+        });
+
+        // Contact form submission (placeholder)
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Message sent! (This is a demo)');
+            });
+        }
+
+        // Smooth scroll animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to articles and cards
+        document.querySelectorAll('article, .hover-scale').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
