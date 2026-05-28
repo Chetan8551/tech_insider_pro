@@ -1,0 +1,6 @@
+Django
+gunicorn
+Pillow
+django-ckeditor-5
+whitenoise
+
