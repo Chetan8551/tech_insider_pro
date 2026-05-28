@@ -1,17 +1,32 @@
-
 from pathlib import Path
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# ========================
+# SECRET KEY
+# ========================
 
 SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
     "change-this-in-production"
 )
 
-DEBUG = True
+# ========================
+# DEBUG
+# ========================
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+# ========================
+# ALLOWED HOSTS
+# ========================
+
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    ".onrender.com",
+]
 
 # ========================
 # APPLICATIONS
@@ -37,7 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
-    # WhiteNoise for static files optimization
+    # WhiteNoise
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -123,7 +138,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'mainapp' / 'static'
+    BASE_DIR / 'mainapp' / 'static',
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -144,6 +159,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # ========================
 
 DJANGO_CKEDITOR_5_UPLOAD_FILE_VIEW = "django_ckeditor_5.views.upload_file"
+
 DJANGO_CKEDITOR_5_UPLOAD_IMAGE_VIEW = "django_ckeditor_5.views.upload_image"
 
 CKEDITOR_5_CONFIGS = {
@@ -175,7 +191,7 @@ MESSAGE_TAGS = {
 }
 
 # ========================
-# SECURITY SETTINGS
+# SECURITY
 # ========================
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -184,12 +200,14 @@ SECURE_BROWSER_XSS_FILTER = True
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = not DEBUG
+
+SESSION_COOKIE_SECURE = not DEBUG
+
+SECURE_SSL_REDIRECT = not DEBUG
 
 # ========================
 # DEFAULT PRIMARY KEY
 # ========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
