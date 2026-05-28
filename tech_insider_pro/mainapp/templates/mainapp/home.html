@@ -1,118 +1,382 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
 
-{% block title %}Home - Tech Insider Pro{% endblock %}
+{% block title %}
+Home | Tech Insider Pro
+{% endblock %}
+
+{% block meta_description %}
+Latest AI tools, software reviews, blogging guides, tech news, and smart buying recommendations.
+{% endblock %}
 
 {% block content %}
-<!-- Hero / Intro Section -->
-<section class="gradient-bg text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">Welcome to Tech Insider Pro</h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-100">Your trusted source for the latest tech reviews, guides, and curated deals.</p>
-        <a href="{% url 'mainapp:blog' %}" 
-           class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
-            Explore Our Blog →
-        </a>
+
+<!-- HERO -->
+<section class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 text-white py-24">
+
+    <div class="max-w-7xl mx-auto px-4 text-center">
+
+        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-8">
+
+            AI Tools, Tech Reviews & Smart Buying Guides
+
+        </h1>
+
+        <p class="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-10">
+
+            Discover the latest AI tools, software recommendations,
+            tech reviews, blogging strategies, and expert buying advice.
+
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+
+            <a href="{% url 'mainapp:blog' %}"
+               class="bg-white text-blue-700 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition">
+
+                Explore Articles →
+
+            </a>
+
+            <a href="{% url 'mainapp:about' %}"
+               class="border border-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue-700 transition">
+
+                Learn More
+
+            </a>
+
+        </div>
+
     </div>
+
 </section>
 
-<!-- Top Picks -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">🔥 Top Picks This Week</h2>
-            <p class="text-gray-600">Hand-picked gadgets and AI tools with exclusive deals</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for pick in top_picks %}
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-6 hover:shadow-lg transition">
-                    {% if pick.image %}
-                        <img src="{{ pick.image.url }}" alt="{{ pick.title }}" class="w-full h-48 object-cover rounded mb-4">
-                    {% endif %}
-                    <h3 class="text-xl font-semibold mb-2">{{ pick.title }}</h3>
-                    {% if pick.subtitle %}<p class="text-gray-600 mb-4">{{ pick.subtitle }}</p>{% endif %}
-                    {% if pick.price_text %}<span class="text-2xl font-bold text-green-600">{{ pick.price_text }}</span>{% endif %}
-                    {% if pick.cta_url %}
-                        <a href="{{ pick.cta_url }}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 ml-2">{{ pick.cta_text }}</a>
-                    {% endif %}
-                </div>
-            {% empty %}
-                <p class="col-span-3 text-center text-gray-500">No top picks available this week.</p>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+<!-- TRUST SECTION -->
+<section class="bg-white py-12 border-b">
 
-<!-- Advertisement Banner -->
-{% if ad_banner %}
-<section class="py-8 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-        {% if ad_banner.image %}
-            <img src="{{ ad_banner.image.url }}" alt="{{ ad_banner.name }}" class="w-full max-w-[728px] rounded shadow">
-        {% else %}
-            <div class="w-full max-w-[728px]">
-                {{ ad_banner.script|safe }}
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+
+            <div>
+                <div class="text-4xl mb-4">🧠</div>
+
+                <h3 class="text-xl font-bold mb-2">
+                    Expert Recommendations
+                </h3>
+
+                <p class="text-gray-600">
+                    Carefully researched tools and software recommendations.
+                </p>
             </div>
-        {% endif %}
+
+            <div>
+                <div class="text-4xl mb-4">⭐</div>
+
+                <h3 class="text-xl font-bold mb-2">
+                    Honest Reviews
+                </h3>
+
+                <p class="text-gray-600">
+                    Transparent and unbiased product reviews you can trust.
+                </p>
+            </div>
+
+            <div>
+                <div class="text-4xl mb-4">🚀</div>
+
+                <h3 class="text-xl font-bold mb-2">
+                    Latest Tech Trends
+                </h3>
+
+                <p class="text-gray-600">
+                    Stay updated with AI tools, blogging, and modern technology.
+                </p>
+            </div>
+
+        </div>
+
     </div>
+
+</section>
+
+<!-- TOP PICKS -->
+<section class="py-20 bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="text-center mb-14">
+
+            <h2 class="text-4xl font-bold mb-4">
+                🔥 Top Picks
+            </h2>
+
+            <p class="text-gray-600 text-lg">
+                Handpicked products and tools we genuinely recommend.
+            </p>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+            {% for pick in top_picks %}
+
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition duration-300">
+
+                {% if pick.image %}
+                <img
+                    src="{{ pick.image.url }}"
+                    alt="{{ pick.title }}"
+                    class="w-full h-56 object-cover rounded-xl mb-6"
+                    loading="lazy">
+                {% endif %}
+
+                <h3 class="text-2xl font-bold mb-3">
+                    {{ pick.title }}
+                </h3>
+
+                <p class="text-gray-600 mb-5 leading-relaxed">
+                    {{ pick.subtitle }}
+                </p>
+
+                {% if pick.price_text %}
+                <div class="text-3xl font-bold text-green-600 mb-6">
+                    {{ pick.price_text }}
+                </div>
+                {% endif %}
+
+                {% if pick.cta_url %}
+                <a href="{{ pick.cta_url }}"
+                   target="_blank"
+                   rel="nofollow sponsored"
+                   class="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition">
+
+                    {{ pick.cta_text }}
+
+                </a>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- AD BANNER -->
+{% if ad_banner %}
+<section class="py-10 bg-white">
+
+    <div class="max-w-5xl mx-auto text-center px-4">
+
+        {% if ad_banner.image %}
+
+        <img
+            src="{{ ad_banner.image.url }}"
+            alt="{{ ad_banner.name }}"
+            class="mx-auto rounded-xl shadow-md"
+            loading="lazy">
+
+        {% else %}
+
+            {{ ad_banner.script|safe }}
+
+        {% endif %}
+
+    </div>
+
 </section>
 {% endif %}
 
-<!-- Latest Blog Posts -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">📘 Latest Blog Posts</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- LATEST ARTICLES -->
+<section class="py-20 bg-white">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="flex justify-between items-center mb-14">
+
+            <h2 class="text-4xl font-bold text-gray-900">
+                Latest Articles
+            </h2>
+
+            <a href="{% url 'mainapp:blog' %}"
+               class="text-blue-600 font-semibold hover:text-blue-800">
+
+                View All →
+
+            </a>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
             {% for post in latest_posts %}
-                <article class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition p-6">
-                    {% if post.featured_image %}
-                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" 
-                             class="w-full h-48 object-cover rounded-lg mb-4">
-                    {% else %}
-                        <div class="h-48 bg-gray-200 flex items-center justify-center rounded-lg mb-4">
-                            <i class="fas fa-mobile-alt text-4xl text-gray-400"></i>
-                        </div>
+
+            <article class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300">
+
+                {% if post.featured_image %}
+                <img
+                    src="{{ post.featured_image.url }}"
+                    alt="{{ post.title }}"
+                    class="w-full h-56 object-cover"
+                    loading="lazy">
+                {% endif %}
+
+                <div class="p-6">
+
+                    {% if post.category %}
+                    <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+
+                        {{ post.category }}
+
+                    </span>
                     {% endif %}
-                    <h3 class="text-xl font-semibold mb-3 leading-snug">
-                        <a href="{% url 'mainapp:post_detail' post.pk %}" class="hover:underline">
+
+                    <h3 class="text-2xl font-bold leading-snug mb-4">
+
+                        <a href="{{ post.get_absolute_url }}"
+                           class="hover:text-blue-600 transition">
+
                             {{ post.title }}
+
                         </a>
+
                     </h3>
-                    <p class="text-gray-600 mb-5 leading-relaxed">
-                        {{ post.excerpt|default:post.content|truncatechars:120 }}
+
+                    <p class="text-gray-600 leading-relaxed mb-6">
+
+                        {{ post.excerpt|default:post.content|striptags|truncatechars:120 }}
+
                     </p>
-                    <a href="{% url 'mainapp:post_detail' post.pk %}" 
-                       class="inline-block text-blue-600 font-medium hover:text-blue-800 transition">
+
+                    <a href="{{ post.get_absolute_url }}"
+                       class="text-blue-600 font-semibold hover:text-blue-800">
+
                         Read More →
+
                     </a>
-                </article>
-            {% empty %}
-                <p class="col-span-3 text-center text-gray-500">No posts published yet.</p>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
-
-<!-- Latest Reviews -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">⭐ Latest Reviews</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for review in latest_reviews %}
-                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                    {% if review.featured_image %}
-                        <img src="{{ review.featured_image.url }}" alt="{{ review.title }}" class="w-full h-40 object-cover rounded mb-4">
-                    {% endif %}
-                    <h3 class="text-xl font-semibold mb-2">{{ review.title }}</h3>
-                    <p class="text-gray-600 mb-4">{{ review.excerpt|truncatechars:120 }}</p>
-                    <div class="mb-3">⭐ {{ review.rating }}/5</div>
-                    <a href="{% url 'mainapp:review_detail' review.slug %}" class="text-blue-600 font-medium hover:text-blue-800">Read Full Review →</a>
                 </div>
-            {% empty %}
-                <p class="col-span-3 text-center text-gray-500">No reviews available yet.</p>
+
+            </article>
+
             {% endfor %}
+
         </div>
+
     </div>
+
 </section>
+
+<!-- REVIEWS -->
+<section class="py-20 bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="text-center mb-14">
+
+            <h2 class="text-4xl font-bold mb-4">
+                ⭐ Latest Reviews
+            </h2>
+
+            <p class="text-gray-600 text-lg">
+                Honest reviews of software, AI tools, gadgets, and services.
+            </p>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+            {% for review in latest_reviews %}
+
+            <article class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+
+                {% if review.featured_image %}
+                <img
+                    src="{{ review.featured_image.url }}"
+                    alt="{{ review.title }}"
+                    class="w-full h-56 object-cover"
+                    loading="lazy">
+                {% endif %}
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        {{ review.title }}
+                    </h3>
+
+                    <div class="text-yellow-500 text-lg mb-4">
+                        ⭐ {{ review.rating }}/5
+                    </div>
+
+                    <p class="text-gray-600 leading-relaxed mb-6">
+
+                        {{ review.excerpt|truncatechars:120 }}
+
+                    </p>
+
+                    <a href="{% url 'mainapp:review_detail' review.slug %}"
+                       class="text-blue-600 font-semibold hover:text-blue-800">
+
+                        Read Review →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- NEWSLETTER -->
+<section class="py-20 bg-blue-700 text-white">
+
+    <div class="max-w-3xl mx-auto text-center px-4">
+
+        <h2 class="text-4xl font-bold mb-6">
+            Stay Updated
+        </h2>
+
+        <p class="text-xl text-blue-100 mb-8">
+
+            Get the latest AI tools, tech updates, and blogging tips delivered to your inbox.
+
+        </p>
+
+        <form method="post"
+              action="{% url 'mainapp:subscribe' %}"
+              class="flex flex-col sm:flex-row gap-4 justify-center">
+
+            {% csrf_token %}
+
+            <input
+                type="email"
+                name="email"
+                required
+                placeholder="Enter your email"
+                class="px-5 py-4 rounded-xl text-gray-900 w-full sm:w-96">
+
+            <button
+                type="submit"
+                class="bg-white text-blue-700 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition">
+
+                Subscribe
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
 {% endblock %}

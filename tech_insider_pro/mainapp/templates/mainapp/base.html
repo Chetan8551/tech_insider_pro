@@ -1,114 +1,381 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  {% load static %}
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Tech Insider Pro{% endblock %}</title>
+    {% load static %}
 
-  <!-- TailwindCSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>
+        {% block title %}
+        Tech Insider Pro
+        {% endblock %}
+    </title>
+
+    <meta name="description"
+          content="{% block meta_description %}Latest AI tools, software reviews, blogging guides, and smart tech recommendations.{% endblock %}">
+
+    <meta name="keywords"
+          content="AI tools, tech reviews, blogging, software, gadgets, technology, affiliate marketing">
+
+    <meta name="author"
+          content="Tech Insider Pro">
+
+    <meta name="robots"
+          content="index, follow">
+
+    <meta name="googlebot"
+          content="index, follow">
+
+    <!-- CANONICAL -->
+    <link rel="canonical"
+          href="{{ request.build_absolute_uri }}">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title"
+          content="{% block og_title %}Tech Insider Pro{% endblock %}">
+
+    <meta property="og:description"
+          content="{% block og_description %}Latest AI tools, software reviews, and smart tech insights.{% endblock %}">
+
+    <meta property="og:type"
+          content="website">
+
+    <meta property="og:url"
+          content="{{ request.build_absolute_uri }}">
+
+    <meta property="og:site_name"
+          content="Tech Insider Pro">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="{% block twitter_title %}Tech Insider Pro{% endblock %}">
+
+    <meta name="twitter:description"
+          content="{% block twitter_description %}Latest AI tools, software reviews, and tech guides.{% endblock %}">
+
+    <!-- FAVICON -->
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'mainapp/images/favicon.png' %}">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- TAILWIND -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet"
+          href="{% static 'mainapp/css/styles.css' %}">
+
+    <!-- ADSENSE -->
+    <!-- Replace ca-pub-xxxxxxxx with your AdSense ID -->
+    <!--
+    <script async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxx"
+            crossorigin="anonymous">
+    </script>
+    -->
+
+    {% block extra_head %}
+    {% endblock %}
+
 </head>
-<body class="bg-gray-50">
 
-  <!-- Navigation -->
-  <nav class="sticky-nav bg-white shadow-lg">
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <div class="flex items-center">
-          <i class="fas fa-microchip text-2xl text-blue-600 mr-3"></i>
-          <a href="{% url 'mainapp:home' %}" class="text-xl font-bold text-gray-900">Tech Insider Pro</a>
-        </div>
-        <div class="hidden md:flex space-x-8">
-          <a href="{% url 'mainapp:home' %}" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-          <a href="{% url 'mainapp:blog' %}" class="text-gray-700 hover:text-blue-600 font-medium">Blog</a>
-          <a href="{% url 'mainapp:about' %}" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
-          <a href="{% url 'mainapp:contact' %}" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
-          <a href="{% url 'mainapp:disclaimer' %}">Disclaimer</a>
 
-        </div>
-        <div class="md:hidden">
-          <button id="mobile-menu-btn" class="text-gray-700">
-            <i class="fas fa-bars text-xl"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="px-4 py-4 space-y-4">
-        <a href="{% url 'mainapp:home' %}" class="block text-gray-700 hover:text-blue-600">Home</a>
-        <a href="{% url 'mainapp:blog' %}" class="block text-gray-700 hover:text-blue-600">Blog</a>
-        <a href="{% url 'mainapp:about' %}" class="block text-gray-700 hover:text-blue-600">About</a>
-        <a href="{% url 'mainapp:contact' %}" class="block text-gray-700 hover:text-blue-600">Contact</a>
-      </div>
-    </div>
-  </nav>
+        <div class="flex justify-between items-center py-4">
 
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+            <!-- LOGO -->
+            <a href="{% url 'mainapp:home' %}"
+               class="flex items-center space-x-3">
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <div class="flex items-center mb-4">
-            <i class="fas fa-microchip text-2xl text-blue-400 mr-3"></i>
-            <span class="text-xl font-bold">Tech Insider Pro</span>
-          </div>
-          <p class="text-gray-400">Your trusted source for honest tech reviews and smart purchasing decisions.</p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="{% url 'mainapp:home' %}" class="hover:text-white">Home</a></li>
-            <li><a href="{% url 'mainapp:blog' %}" class="hover:text-white">Blog</a></li>
-            <li><a href="{% url 'mainapp:about' %}" class="hover:text-white">About</a></li>
-            <li><a href="{% url 'mainapp:contact' %}" class="hover:text-white">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Categories</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li>AI Tools</li>
-            <li>Smartphones</li>
-            <li>Accessories</li>
-            <li>Software</li>
-          </ul>
-        </div>
-        <div>
-          <!--<h3 class="text-lg font-semibold mb-4">Newsletter</h3>
-          <p class="text-gray-400 mb-4">Get the latest updates and deals</p>
-          <form method="post" action="{% url 'mainapp:subscribe' %}">
-            {% csrf_token %}
-            <div class="flex">
-              <input type="email" name="email" placeholder="Your email" class="flex-1 px-3 py-2 rounded-l-lg text-gray-900">
-              <button class="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700">
-                <i class="fas fa-paper-plane"></i>
-              </button>
+                <i class="fas fa-microchip text-2xl text-blue-600"></i>
+
+                <span class="text-2xl font-extrabold text-gray-900">
+                    Tech Insider Pro
+                </span>
+
+            </a>
+
+            <!-- DESKTOP MENU -->
+            <div class="hidden md:flex items-center space-x-8">
+
+                <a href="{% url 'mainapp:home' %}"
+                   class="font-medium hover:text-blue-600 transition">
+                    Home
+                </a>
+
+                <a href="{% url 'mainapp:blog' %}"
+                   class="font-medium hover:text-blue-600 transition">
+                    Blog
+                </a>
+
+                <a href="{% url 'mainapp:about' %}"
+                   class="font-medium hover:text-blue-600 transition">
+                    About
+                </a>
+
+                <a href="{% url 'mainapp:contact' %}"
+                   class="font-medium hover:text-blue-600 transition">
+                    Contact
+                </a>
+
             </div>
-          </form>-->
-        </div>
-      </div>
-      <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-        <p class="text-gray-400">&copy; 2024 Tech Insider Pro. All rights reserved.</p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
-        </div>
-      </div>
-    </div>
-  </footer>
 
-  <!-- JS -->
-  <script src="{% static 'mainapp/js/main.js' %}"></script>
+            <!-- MOBILE BUTTON -->
+            <button id="mobile-menu-btn"
+                    class="md:hidden text-gray-700">
+
+                <i class="fas fa-bars text-2xl"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu"
+         class="hidden md:hidden bg-white border-t">
+
+        <div class="px-4 py-5 space-y-4">
+
+            <a href="{% url 'mainapp:home' %}"
+               class="block hover:text-blue-600">
+                Home
+            </a>
+
+            <a href="{% url 'mainapp:blog' %}"
+               class="block hover:text-blue-600">
+                Blog
+            </a>
+
+            <a href="{% url 'mainapp:about' %}"
+               class="block hover:text-blue-600">
+                About
+            </a>
+
+            <a href="{% url 'mainapp:contact' %}"
+               class="block hover:text-blue-600">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white py-16 mt-20">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <!-- ABOUT -->
+            <div>
+
+                <div class="flex items-center mb-5">
+
+                    <i class="fas fa-microchip text-2xl text-blue-400 mr-3"></i>
+
+                    <span class="text-2xl font-bold">
+                        Tech Insider Pro
+                    </span>
+
+                </div>
+
+                <p class="text-gray-400 leading-relaxed">
+
+                    Trusted AI tools, software reviews,
+                    blogging resources, and smart buying guides
+                    for modern creators and tech enthusiasts.
+
+                </p>
+
+            </div>
+
+            <!-- QUICK LINKS -->
+            <div>
+
+                <h3 class="text-lg font-semibold mb-5">
+                    Quick Links
+                </h3>
+
+                <ul class="space-y-3 text-gray-400">
+
+                    <li>
+                        <a href="{% url 'mainapp:home' %}"
+                           class="hover:text-white transition">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mainapp:blog' %}"
+                           class="hover:text-white transition">
+                            Blog
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mainapp:about' %}"
+                           class="hover:text-white transition">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mainapp:contact' %}"
+                           class="hover:text-white transition">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- CATEGORIES -->
+            <div>
+
+                <h3 class="text-lg font-semibold mb-5">
+                    Categories
+                </h3>
+
+                <ul class="space-y-3 text-gray-400">
+
+                    <li>AI Tools</li>
+                    <li>Software Reviews</li>
+                    <li>Blogging Guides</li>
+                    <li>Tech News</li>
+
+                </ul>
+
+            </div>
+
+            <!-- LEGAL -->
+            <div>
+
+                <h3 class="text-lg font-semibold mb-5">
+                    Legal
+                </h3>
+
+                <ul class="space-y-3 text-gray-400">
+
+                    <li>
+                        <a href="{% url 'mainapp:privacy_policy' %}"
+                           class="hover:text-white transition">
+                            Privacy Policy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mainapp:affiliate_disclosure' %}"
+                           class="hover:text-white transition">
+                            Affiliate Disclosure
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mainapp:terms_conditions' %}"
+                           class="hover:text-white transition">
+                            Terms & Conditions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mainapp:disclaimer' %}"
+                           class="hover:text-white transition">
+                            Disclaimer
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+
+            <p class="text-gray-400 text-sm">
+
+                © 2026 Tech Insider Pro.
+                All rights reserved.
+
+            </p>
+
+            <!-- SOCIAL -->
+            <div class="flex space-x-6 mt-5 md:mt-0">
+
+                <a href="#"
+                   class="text-gray-400 hover:text-white transition">
+
+                    <i class="fab fa-twitter text-xl"></i>
+
+                </a>
+
+                <a href="#"
+                   class="text-gray-400 hover:text-white transition">
+
+                    <i class="fab fa-instagram text-xl"></i>
+
+                </a>
+
+                <a href="#"
+                   class="text-gray-400 hover:text-white transition">
+
+                    <i class="fab fa-linkedin text-xl"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- JS -->
+<script src="{% static 'mainapp/js/main.js' %}"></script>
+
 </body>
 </html>
