@@ -1,26 +1,18 @@
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ========================
-# SECRET KEY
+# CORE SETTINGS
 # ========================
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "change-this-in-production"
-)
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "change-this-in-production")
 
-# ========================
-# DEBUG
-# ========================
-
-DEBUG = os.getenv("DEBUG", "False") == "True"
-
-# ========================
-# ALLOWED HOSTS
-# ========================
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -42,7 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'mainapp',
+
     'django_ckeditor_5',
+
     'cloudinary',
     'cloudinary_storage',
 ]
@@ -53,8 +47,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
-    # WhiteNoise
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -74,11 +66,8 @@ ROOT_URLCONF = 'tech_insider_pro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
         'DIRS': [BASE_DIR / 'templates'],
-
         'APP_DIRS': True,
-
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -104,22 +93,14 @@ DATABASES = {
 }
 
 # ========================
-# PASSWORD VALIDATORS
+# PASSWORD VALIDATION
 # ========================
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # ========================
@@ -145,23 +126,28 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = (
-    'whitenoise.storage.CompressedManifestStaticFilesStorage'
-)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ========================
-# MEDIA FILES
+# MEDIA (CLOUDINARY FIXED)
 # ========================
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv("CLOUDINARY_CLOUD_NAME", "dhtv4pqno"),
+    'API_KEY': os.getenv("CLOUDINARY_API_KEY", "996636859655774"),
+    'API_SECRET': os.getenv("CLOUDINARY_API_SECRET", "pKHTtR2-L93goblwXcZFSlRh1f8"),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ========================
-# CKEDITOR
+# CKEDITOR 5
 # ========================
 
 DJANGO_CKEDITOR_5_UPLOAD_FILE_VIEW = "django_ckeditor_5.views.upload_file"
-
 DJANGO_CKEDITOR_5_UPLOAD_IMAGE_VIEW = "django_ckeditor_5.views.upload_image"
 
 CKEDITOR_5_CONFIGS = {
@@ -193,20 +179,22 @@ MESSAGE_TAGS = {
 }
 
 # ========================
-# SECURITY
+# SECURITY (FIXED FOR RENDER)
 # ========================
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 SECURE_BROWSER_XSS_FILTER = True
-
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-CSRF_COOKIE_SECURE = not DEBUG
-
-SESSION_COOKIE_SECURE = not DEBUG
-
-SECURE_SSL_REDIRECT = not DEBUG
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+else:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
 
 # ========================
 # DEFAULT PRIMARY KEY
@@ -214,14 +202,10 @@ SECURE_SSL_REDIRECT = not DEBUG
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dhtv4pqno',
+#     'API_KEY': '996636859655774',
+#     'API_SECRET': 'pKHTtR2-L93goblwXcZFSlRh1f8',
+# }
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dhtv4pqno',
-    'API_KEY': '996636859655774',
-    'API_SECRET': 'pKHTtR2-L93goblwXcZFSlRh1f8',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
