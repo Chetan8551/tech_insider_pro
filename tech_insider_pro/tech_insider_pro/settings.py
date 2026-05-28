@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     'mainapp',
     'django_ckeditor_5',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 # ========================
@@ -211,3 +213,15 @@ SECURE_SSL_REDIRECT = not DEBUG
 # ========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dhtv4pqno',
+    'API_KEY': '996636859655774',
+    'API_SECRET': 'pKHTtR2-L93goblwXcZFSlRh1f8',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
