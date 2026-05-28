@@ -1,26 +1,16 @@
 from pathlib import Path
 import os
+import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ========================
-# SECRET KEY
+# SECURITY
 # ========================
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "change-this-in-production"
-)
-
-# ========================
-# DEBUG
-# ========================
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-dev-key-change-me")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
-
-# ========================
-# ALLOWED HOSTS
-# ========================
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -29,7 +19,7 @@ ALLOWED_HOSTS = [
 ]
 
 # ========================
-# APPLICATIONS
+# APPS
 # ========================
 
 INSTALLED_APPS = [
@@ -42,9 +32,12 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'mainapp',
+
+    # CKEditor
     'django_ckeditor_5',
+
+    # Cloudinary
     'cloudinary',
-    'cloudinary_storage',
 ]
 
 # ========================
@@ -53,8 +46,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
-    # WhiteNoise
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -74,11 +65,8 @@ ROOT_URLCONF = 'tech_insider_pro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
         'DIRS': [BASE_DIR / 'templates'],
-
         'APP_DIRS': True,
-
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -93,7 +81,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tech_insider_pro.wsgi.application'
 
 # ========================
-# DATABASE
+# DATABASE (SQLite OK for now)
 # ========================
 
 DATABASES = {
@@ -104,32 +92,22 @@ DATABASES = {
 }
 
 # ========================
-# PASSWORD VALIDATORS
+# PASSWORD VALIDATION
 # ========================
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # ========================
-# INTERNATIONALIZATION
+# LANGUAGE / TIME
 # ========================
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Kolkata'
-
 USE_I18N = True
 USE_TZ = True
 
@@ -138,16 +116,10 @@ USE_TZ = True
 # ========================
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'mainapp' / 'static',
-]
-
+STATICFILES_DIRS = [BASE_DIR / 'mainapp' / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = (
-    'whitenoise.storage.CompressedManifestStaticFilesStorage'
-)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ========================
 # MEDIA FILES
@@ -157,11 +129,21 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ========================
-# CKEDITOR
+# CLOUDINARY CONFIG (FIXED)
+# ========================
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
+
+# ========================
+# CKEDITOR CONFIG
 # ========================
 
 DJANGO_CKEDITOR_5_UPLOAD_FILE_VIEW = "django_ckeditor_5.views.upload_file"
-
 DJANGO_CKEDITOR_5_UPLOAD_IMAGE_VIEW = "django_ckeditor_5.views.upload_image"
 
 CKEDITOR_5_CONFIGS = {
@@ -179,7 +161,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # ========================
-# MESSAGE TAGS
+# MESSAGES
 # ========================
 
 from django.contrib.messages import constants as messages
@@ -193,35 +175,19 @@ MESSAGE_TAGS = {
 }
 
 # ========================
-# SECURITY
+# SECURITY HEADERS
 # ========================
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
-
 SECURE_BROWSER_XSS_FILTER = True
-
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 CSRF_COOKIE_SECURE = not DEBUG
-
 SESSION_COOKIE_SECURE = not DEBUG
-
 SECURE_SSL_REDIRECT = not DEBUG
 
 # ========================
-# DEFAULT PRIMARY KEY
+# DEFAULT PK
 # ========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dhtv4pqno',
-    'API_KEY': '996636859655774',
-    'API_SECRET': 'pKHTtR2-L93goblwXcZFSlRh1f8',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
