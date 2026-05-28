@@ -1,18 +1,18 @@
 from pathlib import Path
 import os
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ========================
-# CORE SETTINGS
+# SECURITY
 # ========================
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "change-this-in-production")
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -21,7 +21,7 @@ ALLOWED_HOSTS = [
 ]
 
 # ========================
-# APPLICATIONS
+# APPS
 # ========================
 
 INSTALLED_APPS = [
@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'mainapp',
 
     'django_ckeditor_5',
-
     'cloudinary',
     'cloudinary_storage',
 ]
@@ -108,9 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ========================
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Kolkata'
-
 USE_I18N = True
 USE_TZ = True
 
@@ -119,32 +116,36 @@ USE_TZ = True
 # ========================
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'mainapp' / 'static',
-]
-
+STATICFILES_DIRS = [BASE_DIR / 'mainapp' / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ========================
-# MEDIA (CLOUDINARY FIXED)
+# MEDIA (IMPORTANT FIX)
 # ========================
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv("CLOUDINARY_CLOUD_NAME"),
-    'API_KEY': os.getenv("CLOUDINARY_API_KEY"),
-    'API_SECRET': os.getenv("CLOUDINARY_API_SECRET"),
-}
+# CLOUDINARY_STORAGE = {
+#     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME", ""),
+#     "API_KEY": os.getenv("CLOUDINARY_API_KEY", ""),
+#     "API_SECRET": os.getenv("CLOUDINARY_API_SECRET", ""),
+# }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# # FAIL SAFE CHECK (THIS PREVENTS 500 CRASH)
+# if not all([
+#     CLOUDINARY_STORAGE["CLOUD_NAME"],
+#     CLOUDINARY_STORAGE["API_KEY"],
+#     CLOUDINARY_STORAGE["API_SECRET"],
+# ]):
+#     print("⚠️ WARNING: Cloudinary env vars missing!")
+
+#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ========================
-# CKEDITOR 5
+# CKEDITOR
 # ========================
 
 DJANGO_CKEDITOR_5_UPLOAD_FILE_VIEW = "django_ckeditor_5.views.upload_file"
@@ -165,47 +166,19 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # ========================
-# MESSAGE TAGS
-# ========================
-
-from django.contrib.messages import constants as messages
-
-MESSAGE_TAGS = {
-    messages.DEBUG: 'debug',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'danger',
-}
-
-# ========================
-# SECURITY (FIXED FOR RENDER)
+# SECURITY FIX
 # ========================
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
-
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-else:
-    SECURE_SSL_REDIRECT = False
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 
 # ========================
-# DEFAULT PRIMARY KEY
+# DEFAULT PK
 # ========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'dhtv4pqno',
-#     'API_KEY': '996636859655774',
-#     'API_SECRET': 'pKHTtR2-L93goblwXcZFSlRh1f8',
-# }
-
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
