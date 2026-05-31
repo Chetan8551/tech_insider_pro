@@ -1,27 +1,20 @@
+
 from pathlib import Path
 import os
-# import cloudinary
-# import cloudinary.uploader
-# import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ========================
-# SECURITY
-# ========================
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    "change-this-in-production"
+)
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "change-this-in-production")
+DEBUG = True
 
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    ".onrender.com",
-]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # ========================
-# APPS
+# APPLICATIONS
 # ========================
 
 INSTALLED_APPS = [
@@ -34,10 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'mainapp',
-
     'django_ckeditor_5',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 # ========================
@@ -46,6 +36,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # WhiteNoise for static files optimization
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,8 +57,11 @@ ROOT_URLCONF = 'tech_insider_pro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': [BASE_DIR / 'templates'],
+
         'APP_DIRS': True,
+
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -92,14 +87,22 @@ DATABASES = {
 }
 
 # ========================
-# PASSWORD VALIDATION
+# PASSWORD VALIDATORS
 # ========================
 
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 # ========================
@@ -107,7 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # ========================
 
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'Asia/Kolkata'
+
 USE_I18N = True
 USE_TZ = True
 
@@ -116,30 +121,20 @@ USE_TZ = True
 # ========================
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'mainapp' / 'static']
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'mainapp' / 'static'
+]
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = (
+    'whitenoise.storage.CompressedManifestStaticFilesStorage'
+)
 
 # ========================
-# MEDIA (IMPORTANT FIX)
+# MEDIA FILES
 # ========================
-
-# CLOUDINARY_STORAGE = {
-#     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME", ""),
-#     "API_KEY": os.getenv("CLOUDINARY_API_KEY", ""),
-#     "API_SECRET": os.getenv("CLOUDINARY_API_SECRET", ""),
-# }
-
-# # FAIL SAFE CHECK (THIS PREVENTS 500 CRASH)
-# if not all([
-#     CLOUDINARY_STORAGE["CLOUD_NAME"],
-#     CLOUDINARY_STORAGE["API_KEY"],
-#     CLOUDINARY_STORAGE["API_SECRET"],
-# ]):
-#     print("⚠️ WARNING: Cloudinary env vars missing!")
-
-#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -166,19 +161,35 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # ========================
-# SECURITY FIX
+# MESSAGE TAGS
+# ========================
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
+}
+
+# ========================
+# SECURITY SETTINGS
 # ========================
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
 SECURE_BROWSER_XSS_FILTER = True
+
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-SECURE_SSL_REDIRECT = not DEBUG
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 # ========================
-# DEFAULT PK
+# DEFAULT PRIMARY KEY
 # ========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
